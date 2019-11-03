@@ -7,15 +7,15 @@
   
   <title>题解：蔡老板 | hepan&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="有 $n$ 个物品，每个物品价值为 $2^{a_i}$ ，重量为 $w_i$。 选择一些物品，求使得重量 $\ge k$ 的最小价值。 $n\le10^5,a_i\le30,w_i\le10^9,k\le\sum w_i$ solution考虑二分答案 $k$ ，分三类讨论。 如果 $k$ 为偶数，将 $a_i=0$ 的物品按价值从大到小分组，$n$ 个 $a_i=0$ 的物品可以转换为 $\le">
+  <meta name="description" content="有 $n$ 个物品，每个物品价值为 $2^{a_i}$ ，重量为 $w_i$。 选择一些物品，求使得重量 $\ge k$ 的最小价值。 $n\le10^5,a_i\le30,w_i\le10^9,k\le\sum w_i$">
 <meta name="keywords" content="BLOG">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解：蔡老板">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;03&#x2F;%E9%A2%98%E8%A7%A3%EF%BC%9A%E8%94%A1%E8%80%81%E6%9D%BF&#x2F;index.html">
 <meta property="og:site_name" content="hepan&#39;s blog">
-<meta property="og:description" content="有 $n$ 个物品，每个物品价值为 $2^{a_i}$ ，重量为 $w_i$。 选择一些物品，求使得重量 $\ge k$ 的最小价值。 $n\le10^5,a_i\le30,w_i\le10^9,k\le\sum w_i$ solution考虑二分答案 $k$ ，分三类讨论。 如果 $k$ 为偶数，将 $a_i=0$ 的物品按价值从大到小分组，$n$ 个 $a_i=0$ 的物品可以转换为 $\le">
+<meta property="og:description" content="有 $n$ 个物品，每个物品价值为 $2^{a_i}$ ，重量为 $w_i$。 选择一些物品，求使得重量 $\ge k$ 的最小价值。 $n\le10^5,a_i\le30,w_i\le10^9,k\le\sum w_i$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-03T03:17:14.471Z">
+<meta property="og:updated_time" content="2019-11-03T03:29:22.395Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="hepan&#39;s blog" type="application/atom+xml">
@@ -92,17 +92,18 @@
         <p>有 $n$ 个物品，每个物品价值为 $2^{a_i}$ ，重量为 $w_i$。</p>
 <p>选择一些物品，求使得重量 $\ge k$ 的最小价值。</p>
 <p>$n\le10^5,a_i\le30,w_i\le10^9,k\le\sum w_i$</p>
+<a id="more"></a>
 <h3 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h3><p>考虑二分答案 $k$ ，分三类讨论。</p>
 <p>如果 $k$ 为偶数，将 $a_i=0$ 的物品按价值从大到小分组，$n$ 个 $a_i=0$ 的物品可以转换为 $\left \lfloor \frac n2 \right \rfloor$ 个 $a_i=1$ 的物品。</p>
 <p>如果 $k$ 为奇数，取走 $w_i$ 最大的物品，再按 $k$ 为偶数时分组。</p>
 <p>如果 $a_i=0$ 时，将 $a_i,k$ 变为 $\frac{a_i}2,\frac k2$ 即可。</p>
 <p>维护一个堆即可</p>
-<p>时间复杂度：$\Theta(n\log{\sum w_i}\log n)$</p>
+<p>时间复杂度：$\Theta(n\log{\sum 2^{a_i}}\log n)$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/03/%E9%A2%98%E8%A7%A3%EF%BC%9A%E8%94%A1%E8%80%81%E6%9D%BF/" data-id="ck2ifdh4a0003kwrb8q35218p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/03/%E9%A2%98%E8%A7%A3%EF%BC%9A%E8%94%A1%E8%80%81%E6%9D%BF/" data-id="ck2ifygai00006orb4bep45l3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -122,7 +123,8 @@
   
 </article>
 
-</section>
+
+partial('_partial/livere')</section>
         
           <aside id="sidebar">
   
