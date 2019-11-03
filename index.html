@@ -68,6 +68,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-题解：蔡老板" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/03/%E9%A2%98%E8%A7%A3%EF%BC%9A%E8%94%A1%E8%80%81%E6%9D%BF/" class="article-date">
+  <time datetime="2019-11-02T23:18:30.692Z" itemprop="datePublished">2019-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/03/%E9%A2%98%E8%A7%A3%EF%BC%9A%E8%94%A1%E8%80%81%E6%9D%BF/">题解：蔡老板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有 $n$ 个物品，每个物品价值为 $2^{a_i}$ ，重量为 $w_i$。</p>
+<p>选择一些物品，求使得重量 $\ge k$ 的最小价值。</p>
+<p>$n\le10^5,a_i\le30,w_i\le10^9,k\le\sum w_i$</p>
+<h3 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h3><p>考虑二分答案 $k$ ，分三类讨论。</p>
+<p>如果 $k$ 为偶数，将 $a_i=0$ 的物品按价值从大到小分组，$n$ 个 $a_i=0$ 的物品可以转换为 $\left \lfloor \frac n2 \right \rfloor$ 个 $a_i=1$ 的物品。</p>
+<p>如果 $k$ 为奇数，取走 $w_i$ 最大的物品，再按 $k$ 为偶数时分组。</p>
+<p>如果 $a_i=0$ 时，将 $a_i,k$ 变为 $\frac{a_i}2,\frac k2$ 即可。</p>
+<p>维护一个堆即可</p>
+<p>时间复杂度：$\Theta(n\log{\sum w_i}\log n)$</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/03/%E9%A2%98%E8%A7%A3%EF%BC%9A%E8%94%A1%E8%80%81%E6%9D%BF/" data-id="ck2ifdh4a0003kwrb8q35218p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-题解：子序列" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/02/%E9%A2%98%E8%A7%A3%EF%BC%9A%E5%AD%90%E5%BA%8F%E5%88%97/" class="article-date">
@@ -90,14 +135,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>定义 $f(c,s)$ 为将字符串 $s$ 中的每一个间隔包括头尾插入字符 $c$，例如 $f(‘x’,”qwe”)=”xqxwxex”$ 。</p>
+        <p>定义 $f(c,s)$ 为将字符串 $s$ 中的每一个间隔包括头尾插入字符 $c$，例如 $f(\text{x},\text{qwe})=\text{xqxwxex}$ 。</p>
 <p>定义字符串 $s_0$ 到 $s_n$。</p>
 <script type="math/tex; mode=display">
 \left\{\begin{matrix}
 s_0=\varepsilon 
 \\ 
 s_i=f(t_i,s_{i-1})
-\end{matrix}\right.</script><p>求 $s_n$ 本质不同看子序列个数。</p>
+\end{matrix}\right.</script><p>求 $s_n​$ 本质不同看子序列个数。</p>
 <p>对 $998244353$ 取模。</p>
 <p>$n\le2000$</p>
         
@@ -108,7 +153,7 @@ s_i=f(t_i,s_{i-1})
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/02/%E9%A2%98%E8%A7%A3%EF%BC%9A%E5%AD%90%E5%BA%8F%E5%88%97/" data-id="ck2i6oxng0000a8rb4kwx0e02" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/02/%E9%A2%98%E8%A7%A3%EF%BC%9A%E5%AD%90%E5%BA%8F%E5%88%97/" data-id="ck2ifdh470002kwrbf0ylb9g4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -152,7 +197,7 @@ s_i=f(t_i,s_{i-1})
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/02/%E9%A2%98%E8%A7%A3%EF%BC%9A%E5%9B%BE%E8%AE%BA/" data-id="ck2i6oxnt0001a8rbfeg9gn2w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/02/%E9%A2%98%E8%A7%A3%EF%BC%9A%E5%9B%BE%E8%AE%BA/" data-id="ck2ifdh420001kwrb1m1v1iut" class="article-share-link">Share</a>
       
       
     </footer>
@@ -194,7 +239,7 @@ s_i=f(t_i,s_{i-1})
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/01/hello-world/" data-id="ck2i6oxnw0002a8rb3tuk5z27" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/01/hello-world/" data-id="ck2ifdh3l0000kwrb1erf5y0z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -233,6 +278,10 @@ s_i=f(t_i,s_{i-1})
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/11/03/%E9%A2%98%E8%A7%A3%EF%BC%9A%E8%94%A1%E8%80%81%E6%9D%BF/">题解：蔡老板</a>
+          </li>
         
           <li>
             <a href="/2019/11/02/%E9%A2%98%E8%A7%A3%EF%BC%9A%E5%AD%90%E5%BA%8F%E5%88%97/">题解：子序列</a>
