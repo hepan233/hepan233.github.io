@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>题解：生成树 | hepan&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="给定一张 $n$ 个点的完全图，求一个生成树使得 $\sum_{1\le u&amp;lt;v\le n}\text{dis}(u,v)$ 最小。 $n\le15$">
+<meta name="keywords" content="BLOG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="题解：生成树">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;05&#x2F;%E9%A2%98%E8%A7%A3%EF%BC%9A%E7%94%9F%E6%88%90%E6%A0%91&#x2F;index.html">
+<meta property="og:site_name" content="hepan&#39;s blog">
+<meta property="og:description" content="给定一张 $n$ 个点的完全图，求一个生成树使得 $\sum_{1\le u&amp;lt;v\le n}\text{dis}(u,v)$ 最小。 $n\le15$">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-05T13:10:11.775Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="hepan&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">hepan&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">hdp</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-题解：生成树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/05/%E9%A2%98%E8%A7%A3%EF%BC%9A%E7%94%9F%E6%88%90%E6%A0%91/" class="article-date">
+  <time datetime="2019-11-05T12:51:28.308Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      题解：生成树
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定一张 $n$ 个点的完全图，求一个生成树使得 $\sum_{1\le u&lt;v\le n}\text{dis}(u,v)$ 最小。</p>
+<p>$n\le15$</p>
+<a id="more"></a>
+<h3 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h3><h4 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h4><p>生成树可以看成一个根往下一个一个加子树，考虑 $dp$。</p>
+<p>设 $dp_{S,v}$ 表示考虑状态为 $S$ ，根节点为 $u$ 的最小权值生成树。</p>
+<p>对于每个状态，枚举 $S$ 的子集 $T$，进行转移。</p>
+<script type="math/tex; mode=display">
+dp_{S,u}=\min_{T⊂ S,v\in T}dp_{T,v}+dp_{S\backslash T,u}+w_{u,v}\cdot|T|\cdot(n-|T|)</script><p>时间复杂度：$\Theta(3^nn^2)$</p>
+<p>常数好一点就过了。</p>
+<h4 id="正解"><a href="#正解" class="headerlink" title="正解"></a>正解</h4><p>注意 $dp_{T,v}+w_{u,v}\cdot|T|\cdot(n-|T|)$ 只与 $T,u,v$ 有关，可以同时维护一个数组 $g_{S,u}$ 表示当 $T$ 为 $S$ 时，当 $u$ 为 $u$ 时，上式最小值是多少。</p>
+<script type="math/tex; mode=display">
+dp_{S,u}=\min_{T⊂ S,v\in T}dp_{S\backslash T,u}+g_{T,u}</script><script type="math/tex; mode=display">
+g_{S,u}=\min_{v\in S}(dp_{S,v}+w_{u,v}\cdot|S|\cdot(n-|S|))</script><p>时间复杂度：$\Theta(2^nn^2+3^nn)$</p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,w[<span class="number">30</span>][<span class="number">30</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[<span class="number">50010</span>][<span class="number">30</span>],g[<span class="number">50010</span>][<span class="number">30</span>],ans=<span class="number">1e18</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;n-i;j++)&#123;</span><br><span class="line">			<span class="keyword">int</span> x;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">			w[i][i+j]=w[i+j][i]=x;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++) <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++) dp[i][j]=<span class="number">1e18</span>,g[i][j]=<span class="number">1e18</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) dp[<span class="number">1</span>&lt;&lt;i][i]=<span class="number">0</span>; </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> S=<span class="number">0</span>;S&lt;(<span class="number">1</span>&lt;&lt;n);S++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">0</span>;u&lt;n;u++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!(S&amp;(<span class="number">1</span>&lt;&lt;u))) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">int</span> num=__builtin_popcount(S);</span><br><span class="line">			<span class="keyword">if</span>(num==<span class="number">1</span>) dp[S][u]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">for</span>(<span class="keyword">int</span> T=S<span class="number">-1</span>;T;T=(T<span class="number">-1</span>)&amp;S) dp[S][u]=<span class="built_in">min</span>(dp[S][u],dp[S^T][u]+g[T][u]);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> v=<span class="number">0</span>;v&lt;n;v++) <span class="keyword">if</span>(!(S&amp;(<span class="number">1</span>&lt;&lt;v))) g[S][v]=<span class="built_in">min</span>(g[S][v],dp[S][u]+<span class="number">1l</span>l*w[u][v]*num*(n-num));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) ans=<span class="built_in">min</span>(ans,dp[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>][i]);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/05/%E9%A2%98%E8%A7%A3%EF%BC%9A%E7%94%9F%E6%88%90%E6%A0%91/" data-id="ck2lvj3ql0003rsrbc3d91olw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/04/%E9%A2%98%E8%A7%A3%EF%BC%9A%E6%97%B6%E9%97%B4%E8%B7%B3%E8%B7%83/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">题解：时间跳跃</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/05/%E9%A2%98%E8%A7%A3%EF%BC%9A%E7%94%9F%E6%88%90%E6%A0%91/">题解：生成树</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/04/%E9%A2%98%E8%A7%A3%EF%BC%9A%E6%97%B6%E9%97%B4%E8%B7%B3%E8%B7%83/">题解：时间跳跃</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/%E9%A2%98%E8%A7%A3%EF%BC%9A%E8%94%A1%E8%80%81%E6%9D%BF/">题解：蔡老板</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/02/%E9%A2%98%E8%A7%A3%EF%BC%9A%E5%AD%90%E5%BA%8F%E5%88%97/">题解：子序列</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/02/%E9%A2%98%E8%A7%A3%EF%BC%9A%E5%9B%BE%E8%AE%BA/">题解：图论</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 He Pan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> 
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>   
+</body>
+</html>
